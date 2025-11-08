@@ -1,10 +1,3 @@
-abstract class InterestBearing {
-  double calculateInterest();
-}
-
-// ----------------------
-// Base Class: BankAccount
-// ----------------------
 abstract class BankAccount {
   int _accountNumber;
   String _holderName;
@@ -38,6 +31,10 @@ abstract class BankAccount {
   void updateBalance(double newBalance) {
     _balance = newBalance;
   }
+}
+
+abstract class InterestBearing {
+  double calculateInterest();
 }
 
 // ----------------------
@@ -251,10 +248,10 @@ class Bank {
 void main() {
   Bank bank = Bank();
 
-  var acc1 = SavingsAccount(1001, 'Alice', 1500);
-  var acc2 = CheckingAccount(1002, 'Bob', 300);
-  var acc3 = PremiumAccount(1003, 'Charlie', 20000);
-  var acc4 = StudentAccount(1004, 'Diana', 1000);
+  var acc1 = SavingsAccount(1001, 'Aashish', 1500);
+  var acc2 = CheckingAccount(1002, 'Pragyan', 300);
+  var acc3 = PremiumAccount(1003, 'Sailesh', 20000);
+  var acc4 = StudentAccount(1004, 'Utsav', 1000);
 
   bank.createAccount(acc1);
   bank.createAccount(acc2);
@@ -265,9 +262,8 @@ void main() {
   acc2.withdraw(500);
   acc3.withdraw(5000);
   acc4.deposit(4500);
-  acc4.deposit(600); // should fail
 
-  bank.transfer(1001, 1002, 200);
-  bank.applyMonthlyInterest();
-  bank.generateReport();
+  bank.transfer(1001, 1002, 200); // balance transfer process = from, to, amount
+  bank.applyMonthlyInterest();// apply for the interest
+  bank.generateReport();// generate report 
 }
