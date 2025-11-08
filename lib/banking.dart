@@ -1,5 +1,6 @@
+
 abstract class BankAccount {
-  int _accountNumber;
+  int _accountNumber; //encapsulation (private fields whicha cannot access directly from outside)
   String _holderName;
   double _balance;
   List<String> _transactions = [];
@@ -40,7 +41,7 @@ abstract class InterestBearing {
 // ----------------------
 // Savings Account
 // ----------------------
-class SavingsAccount extends BankAccount implements InterestBearing {
+class SavingsAccount extends BankAccount implements InterestBearing {  // inheritance
   static const double _minBalance = 500.0;
   static const double _interestRate = 0.02;
   static const int _withdrawLimit = 3;
@@ -49,7 +50,7 @@ class SavingsAccount extends BankAccount implements InterestBearing {
   SavingsAccount(int accountNumber, String holderName, double balance)
       : super(accountNumber, holderName, balance);
 
-  @override
+  @override     // abstraction
   void withdraw(double amount) {
     if (_withdrawCount >= _withdrawLimit) {
       print('Withdrawal limit reached.');
@@ -69,7 +70,7 @@ class SavingsAccount extends BankAccount implements InterestBearing {
     print('Withdrew \$${amount.toStringAsFixed(2)} from Savings Account.');
   }
 
-  @override
+  @override    // abstraction
   void deposit(double amount) {
     if (amount > 0) {
       updateBalance(balance + amount);
@@ -78,7 +79,7 @@ class SavingsAccount extends BankAccount implements InterestBearing {
     }
   }
 
-  @override
+  @override   // abstraction
   double calculateInterest() {
     double interest = balance * _interestRate;
     print('Interest for $holderName: \$${interest.toStringAsFixed(2)}');
@@ -89,7 +90,7 @@ class SavingsAccount extends BankAccount implements InterestBearing {
 // ----------------------
 // Checking Account
 // ----------------------
-class CheckingAccount extends BankAccount {
+class CheckingAccount extends BankAccount {  // inheritance
   static const double _overdraftFee = 35.0;
 
   CheckingAccount(int accountNumber, String holderName, double balance)
@@ -106,7 +107,7 @@ class CheckingAccount extends BankAccount {
     addTransaction('Withdrew \$${amount.toStringAsFixed(2)}');
   }
 
-  @override
+  @override   // abstraction
   void deposit(double amount) {
     if (amount > 0) {
       updateBalance(balance + amount);
@@ -119,14 +120,14 @@ class CheckingAccount extends BankAccount {
 // ----------------------
 // Premium Account
 // ----------------------
-class PremiumAccount extends BankAccount implements InterestBearing {
-  static const double _minBalance = 10000.0;
+class PremiumAccount extends BankAccount implements InterestBearing {   // inheritance
+  static const double _minBalance = 10000.0;  
   static const double _interestRate = 0.05;
 
   PremiumAccount(int accountNumber, String holderName, double balance)
       : super(accountNumber, holderName, balance);
 
-  @override
+  @override   // abstraction
   void withdraw(double amount) {
     if (balance - amount < _minBalance) {
       print('Cannot withdraw below minimum balance of \$$_minBalance.');
@@ -137,7 +138,7 @@ class PremiumAccount extends BankAccount implements InterestBearing {
     addTransaction('Withdrew \$${amount.toStringAsFixed(2)}');
   }
 
-  @override
+  @override   // abstraction
   void deposit(double amount) {
     if (amount > 0) {
       updateBalance(balance + amount);
@@ -145,7 +146,7 @@ class PremiumAccount extends BankAccount implements InterestBearing {
     }
   }
 
-  @override
+  @override   // abstraction
   double calculateInterest() {
     double interest = balance * _interestRate;
     print('Interest for $holderName: \$${interest.toStringAsFixed(2)}');
@@ -156,13 +157,13 @@ class PremiumAccount extends BankAccount implements InterestBearing {
 // ----------------------
 // Student Account (New)
 // ----------------------
-class StudentAccount extends BankAccount {
+class StudentAccount extends BankAccount {   // inheritance
   static const double _maxBalance = 5000.0;
 
   StudentAccount(int accountNumber, String holderName, double balance)
       : super(accountNumber, holderName, balance);
 
-  @override
+  @override   // abstraction
   void withdraw(double amount) {
     if (balance - amount < 0) {
       print('Insufficient funds.');
@@ -173,7 +174,7 @@ class StudentAccount extends BankAccount {
     addTransaction('Withdrew \$${amount.toStringAsFixed(2)}');
   }
 
-  @override
+  @override   // abstraction
   void deposit(double amount) {
     if (balance + amount > _maxBalance) {
       print('Cannot exceed maximum balance of \$$_maxBalance.');
